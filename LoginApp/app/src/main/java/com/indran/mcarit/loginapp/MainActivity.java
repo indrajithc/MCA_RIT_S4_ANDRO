@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String loginEmail = (String) email.getText();
-        String loginPassword = (String) password.getText();
+        String loginEmail = String.valueOf(email.getText());
+        String loginPassword =  String.valueOf(password.getText());
 
         if (loginEmail.equals("admin@admin.com") && loginPassword.equals("admin123")) {
             Intent i = new Intent(getApplicationContext(),Home.class);
@@ -39,3 +39,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+
