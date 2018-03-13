@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
             ip.setError( "field is required!" );
 
         }else{
- 
+
             Intent intent = new Intent( MainActivity.this, ShowData.class);
-            intent.putExtra("message", ip.getText());
+            intent.putExtra("message", ip.getText().toString());
             startActivity(intent);
         }
 

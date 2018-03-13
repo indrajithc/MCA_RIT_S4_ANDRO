@@ -3,6 +3,7 @@ package com.indran.mcarit.navigation;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,8 +16,12 @@ public class ShowData extends AppCompatActivity {
 
         ip = (TextView) findViewById(R.id.op);
 
+
+
         Bundle bundle = getIntent().getExtras();
         String message = bundle.getString("message");
+
+        Log.d("OP", message);
 
         ip.setText(message);
     }
