@@ -1,5 +1,6 @@
 package com.indran.onlineregistration;
 
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class Registration extends AppCompatActivity {
+public class Update extends AppCompatActivity {
 
 
     AutoCompleteTextView name, email, dob, address, password, cpassword;
@@ -29,7 +30,7 @@ public class Registration extends AppCompatActivity {
     private Calendar calendar;
 
     private int year, month, day;
-
+    SharedPreferences settings;
 
     DatabaseHelper databaseHelper;
 
@@ -48,6 +49,8 @@ public class Registration extends AppCompatActivity {
         cpassword = (AutoCompleteTextView) findViewById(R.id.cpassword);
 
 
+         settings = getSharedPreferences(PREFS_NAME, 0);
+
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
 
@@ -56,16 +59,20 @@ public class Registration extends AppCompatActivity {
         showDate(year, month+1, day);
 
 
-        databaseHelper = new DatabaseHelper(Registration.this);
+        databaseHelper = new DatabaseHelper(Update.this);
 
         dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
                     setDate(view);
-                    }
+                }
             }
         });
+
+
+
+        fetchFirst ();
 
     }
 
@@ -138,21 +145,23 @@ public class Registration extends AppCompatActivity {
         }
 
 
-        boolean isInserted = databaseHelper.insertData(name.getText().toString(), email.getText().toString(),
+
+
+
+        boolean isInserted = databaseHelper.updateData(String.valueOf(settings.getString("id", "")), name.getText().toString(), email.getText().toString(),
                 dob.getText().toString(),
                 address.getText().toString(), password.getText().toString() );
         if(isInserted == true){
 
-            Toast.makeText(Registration.this,"Registration successful ",Toast.LENGTH_LONG).show();
+            Toast.makeText(Update.this,"Data Inserted",Toast.LENGTH_LONG).show();
 
-//setLogin();
 
-            Intent intent = new Intent( Registration.this, MainActivity.class);
+            Intent intent = new Intent( Update.this, Home.class);
 
             startActivity(intent);
         }
-          else
-            Toast.makeText(Registration.this,"invalid data ",Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(Update.this,"Data not Inserted",Toast.LENGTH_LONG).show();
 
 
 
@@ -165,22 +174,55 @@ public class Registration extends AppCompatActivity {
 
     }
 
-    private void  setLogin () {
-                Cursor res = databaseHelper.getAllData();
+
+    private void  fetchFirst () {
+
+        int isLogin = 0;
+        Cursor res = databaseHelper.getAllData();
         if(res.getCount() == 0) {
             // show message
             Log.d("Error","Nothing found");
             return;
         }
 
-        StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
 
-//            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-//            settings.edit().putString("id", res.getString(0)).commit();
-            break;
+
+
+            String id = res.getString(res.getColumnIndex(DatabaseHelper.COL_1));
+
+            Log.d("MAIN", settings.getString("id", ""));
+
+
+
+
+
+            if (id.equals( settings.getString("id", "")) )
+                isLogin = Integer.parseInt(id);
+
+//            name.setText(res.getColumnIndex(DatabaseHelper.COL_2));
+//            email.setText(res.getColumnIndex(DatabaseHelper.COL_3));
+//            dob.setText(res.getColumnIndex(DatabaseHelper.COL_4));
+//            address.setText(res.getColumnIndex(DatabaseHelper.COL_5));
+
+
+
         }
 
 
+        if ( ! (isLogin > 0) ) {
+            Intent intent = new Intent( Update.this, Home.class);
+            startActivity(intent);
+        } else {
+
+
+        }
+
+
+
+
+
     }
+
+
 }

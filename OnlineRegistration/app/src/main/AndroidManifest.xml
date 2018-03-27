@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:noHistory="true"
             android:theme="@style/NoTitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,9 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".Registration"></activity>
+        <activity android:name=".Registration" />
+        <activity android:name=".Home" />
+        <activity android:name=".Update"></activity>
     </application>
 
 </manifest>

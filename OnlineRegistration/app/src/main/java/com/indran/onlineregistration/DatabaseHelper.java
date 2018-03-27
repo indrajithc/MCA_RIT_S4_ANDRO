@@ -18,8 +18,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "basic_details";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "NAME";
-    public static final String COL_3 = "DOB";
-    public static final String COL_4 = "ADDRESS";
+    public static final String COL_3 = "EMAIL";
+    public static final String COL_4 = "DOB";
+    public static final String COL_5 = "ADDRESS";
+    public static final String COL_6 = "PASSWORD";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -28,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME +
-                " (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,DOB TEXT,ADDRESS TEXT)");
+                " (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,DOB TEXT,EMAIL TEXT ,ADDRESS TEXT, PASSWORD TEXT)");
     }
 
     @Override
@@ -37,12 +39,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name,String dob,String address) {
+    public boolean insertData(String name,String email, String dob,String address, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,name);
-        contentValues.put(COL_3,dob);
-        contentValues.put(COL_4,address);
+        contentValues.put(COL_3,email);
+        contentValues.put(COL_4,dob);
+        contentValues.put(COL_5,address);
+        contentValues.put(COL_6,password);
         long result = db.insert(TABLE_NAME,null ,contentValues);
         if(result == -1)
             return false;
@@ -56,13 +60,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateData(String id,String name,String dob,String address) {
+    public boolean updateData(String id,String name,String email,String dob,String address, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1,id);
         contentValues.put(COL_2,name);
-        contentValues.put(COL_3,dob);
-        contentValues.put(COL_4,address);
+        contentValues.put(COL_3,email);
+        contentValues.put(COL_4,dob);
+        contentValues.put(COL_5,address);
+        contentValues.put(COL_6,password);
         db.update(TABLE_NAME, contentValues, "ID = ?",new String[] { id });
         return true;
     }
