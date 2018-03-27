@@ -200,10 +200,10 @@ public class Update extends AppCompatActivity {
             if (id.equals( settings.getString("id", "")) )
                 isLogin = Integer.parseInt(id);
 
-//            name.setText(res.getColumnIndex(DatabaseHelper.COL_2));
-//            email.setText(res.getColumnIndex(DatabaseHelper.COL_3));
-//            dob.setText(res.getColumnIndex(DatabaseHelper.COL_4));
-//            address.setText(res.getColumnIndex(DatabaseHelper.COL_5));
+            name.setText(res.getString(res.getColumnIndex(DatabaseHelper.COL_2)));
+            email.setText(res.getString(res.getColumnIndex(DatabaseHelper.COL_3)));
+            dob.setText(res.getString(res.getColumnIndex(DatabaseHelper.COL_4)));
+            address.setText(res.getString(res.getColumnIndex(DatabaseHelper.COL_5)));
 
 
 
