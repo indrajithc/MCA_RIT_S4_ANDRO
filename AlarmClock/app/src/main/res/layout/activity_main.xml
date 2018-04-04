@@ -19,26 +19,26 @@
 
 
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alarm On/Off"
-        android:id="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/time"
-        android:onClick="onTClicked" />
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alarm On/Off"
+            android:id="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/time"
+            android:onClick="onTClicked" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/text"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:layout_below="@+id/button" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=""
+                android:id="@+id/text"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:layout_below="@+id/button" />
 
 
-</RelativeLayout>
+            </RelativeLayout>
